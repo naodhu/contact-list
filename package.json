@@ -1,0 +1,23 @@
+{
+  "name": "contactlist",
+  "version": "1.0.0",
+  "description": "## Description",
+  "main": "server/server.js",
+  "scripts": {
+    "backend-install": "cd backend && npm install",
+    "backend-start": "cd backend && npm start",
+    "backend-watch": "cd backend && npm run watch",
+    "frontend-install": "cd client && npm install",
+    "frontend-start": "cd client && npm start",
+    "frontend-build": "cd client && npm run build",
+    "install": "npm run backend-install && npm run frontend-install",
+    "start": "npm run backend-start",
+    "develop": "concurrently \"npm run backend-start\" \"npm run frontend-start\"",
+    "build": "npm run frontend-build"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^8.0.1"
+  }
+}
