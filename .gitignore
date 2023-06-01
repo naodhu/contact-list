@@ -1,7 +1,7 @@
 node_modules
 .DS_Store
-/build/
-build
+
+
 .github
 
 DS_Store files are created by Mac OS X Finder and should be ignored by git. The node_modules directory is created by npm and should also be ignored by git.
