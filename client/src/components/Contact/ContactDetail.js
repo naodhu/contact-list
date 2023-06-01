@@ -49,13 +49,13 @@ const ContactDetail = () => {
       .delete(`http://localhost:4000/contacts/${id}`)
       .then((res) => res.data)
       .then(() => navigate("/"))
-      .then(() => navigate("/contacts"));
+      .then(() => navigate("/"));
   };
 
   const handleSubmit = (e) => {
     // submit function
     e.preventDefault();
-    sendRequest().then(() => navigate("/contacts"));
+    sendRequest().then(() => navigate("/"));
   };
 
   // this function handles the change of the input fields

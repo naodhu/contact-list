@@ -16,7 +16,7 @@ const Header = () => {
             textColor="inherit"
             indicatorColor="secondary"
           >
-            <Tab LinkComponent={NavLink} to="/contacts" label="Contacts" />
+            <Tab LinkComponent={NavLink} to="/" label="Contacts" />
           </Tabs>
         </Toolbar>
       </AppBar>

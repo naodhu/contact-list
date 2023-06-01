@@ -48,7 +48,7 @@ const AddContact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(inputs);
-    sendRequest().then(() => history("/contacts"));
+    sendRequest().then(() => history("/"));
   };
 
   return (

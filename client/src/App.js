@@ -15,7 +15,7 @@ function App() {
       <main>
         <Routes>
           {/* <Route path="/" element={<Home />} exact /> */}
-          <Route path="/contacts" element={<Contacts />} exact />
+          <Route path="/" element={<Contacts />} exact />
           <Route path="/manageContacts" element={<ContactManagement />} exact />
           <Route path="/contacts/:id" element={<ContactDetail />} exact />
         </Routes>

@@ -29,7 +29,7 @@ const ImportContacts = () => {
       if (response.status < 400) {
         // Modified condition
         alert("Contacts imported successfully");
-        navigate('/contacts'); // Navigate to contacts page
+        navigate('/'); // Navigate to contacts page
       } else {
         alert("Failed to import contacts");
       }
