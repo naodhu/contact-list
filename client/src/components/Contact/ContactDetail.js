@@ -17,7 +17,7 @@ import { useNavigate } from "react-router-dom";
 const ContactDetail = () => {
   const [inputs, setInputs] = useState({});
   const id = useParams().id;
-  const history = useNavigate();
+  const navigate = useNavigate();
 
   // this useEffect is used to fetch the contact with the id from the url
   useEffect(() => {
@@ -48,14 +48,14 @@ const ContactDetail = () => {
     await axios
       .delete(`http://localhost:4000/contacts/${id}`)
       .then((res) => res.data)
-      .then(() => history("/"))
-      .then(() => history("/contacts"));
+      .then(() => navigate("/"))
+      .then(() => navigate("/contacts"));
   };
 
   const handleSubmit = (e) => {
     // submit function
     e.preventDefault();
-    sendRequest().then(() => history("/contacts"));
+    sendRequest().then(() => navigate("/contacts"));
   };
 
   // this function handles the change of the input fields

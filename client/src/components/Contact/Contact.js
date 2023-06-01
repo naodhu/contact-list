@@ -4,6 +4,14 @@ import { Link } from "react-router-dom";
 import "./Contact.css";
 
 const Contact = ({ contact }) => {
+  if (typeof contact === "string") {
+    return (
+      <ListItem>
+        <ListItemText primary={contact} />
+      </ListItem>
+    );
+  }
+
   const { _id, firstName, lastName } = contact;
 
   return (
