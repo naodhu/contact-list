@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const router = require("./routes/contact-routes");
@@ -12,9 +13,7 @@ app.use(cors());
 app.use("/contacts", router);
 
 mongoose
-  .connect(
-    "mongodb+srv://naodhunde:naodhunde@cluster0.wkctxr9.mongodb.net/contactList?retryWrites=true&w=majority"
-  )
+  .connect(process.env.MONGODB_URI)
   .then(() => console.log("Connected to MongoDB Atlas"))
   .then(() => {
     app.listen(4000, () => console.log("Server is running..."));
