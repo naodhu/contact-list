@@ -43,7 +43,7 @@ npm run develop // This command will run both the frontend and backend concurren
 The database used in this project is MongoDB. To connect to the database you need to create a .env file in the Backend folder and add the following line:
 
 ```
-MONGODB_URI= "mongodb+srv://naodhunde:naodhunde@cluster0.wkctxr9.mongodb.net/contactList?retryWrites=true&w=majority"
+MONGODB_URI = "your mongodb uri"
 ```
 
 ## Technologies
