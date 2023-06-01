@@ -1,29 +1,35 @@
-// ImportContacts.js
-
 import React, { useState } from "react";
 import { Button, Typography, Grid, Box } from "@mui/material";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-import axios from "axios"; // Import axios
+import axios from "axios";
+import { useNavigate } from 'react-router-dom';  
 import "./assets/styles/ImportContacts.css";
 
 const ImportContacts = () => {
   const [selectedFile, setSelectedFile] = useState();
+  const navigate = useNavigate(); // Use useHistory
 
   const submitFile = async () => {
     if (!selectedFile) return;
 
     try {
-      const vCardString = await readFileAsync(selectedFile);
       const formData = new FormData();
-      formData.append("vCard", vCardString);
+      formData.append("vCard", selectedFile);
 
       const response = await axios.post(
         "http://localhost:4000/contacts/import",
-        formData
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
       );
 
-      if (response.status === 200) {
+      if (response.status < 400) {
+        // Modified condition
         alert("Contacts imported successfully");
+        navigate('/contacts'); // Navigate to contacts page
       } else {
         alert("Failed to import contacts");
       }
@@ -32,24 +38,13 @@ const ImportContacts = () => {
     }
   };
 
-  const readFileAsync = (file) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-
-      reader.onload = (event) => {
-        resolve(event.target.result);
-      };
-
-      reader.onerror = (event) => {
-        reject(new Error("Error reading file"));
-      };
-
-      reader.readAsText(file);
-    });
-  };
-
   return (
-    <Grid container direction="column" alignItems="center" className="import-container">
+    <Grid
+      container
+      direction="column"
+      alignItems="center"
+      className="import-container"
+    >
       <Typography variant="h5" gutterBottom className="import-title">
         Import Contacts from vCard
       </Typography>
