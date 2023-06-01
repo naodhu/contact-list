@@ -95,7 +95,6 @@ const deleteContact = async (req, res, next) => {
 };
 
 // Importing contacts function
-// Importing contacts function
 const importContacts = async (req, res, next) => {
   // check if the file exists
   if (!req.file) {
