@@ -49,7 +49,7 @@ const ImportContacts = () => {
   };
 
   return (
-    <Grid container direction="column" alignItems="center">
+    <Grid container direction="column" alignItems="center" className="import-container">
       <Typography variant="h5" gutterBottom className="import-title">
         Import Contacts from vCard
       </Typography>
@@ -60,6 +60,7 @@ const ImportContacts = () => {
           id="contained-button-file"
           type="file"
           onChange={(e) => setSelectedFile(e.target.files[0])}
+          className="import-input-file"
         />
         <label htmlFor="contained-button-file">
           <Button

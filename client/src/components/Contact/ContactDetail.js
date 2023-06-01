@@ -4,9 +4,9 @@ import { useParams } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
-import IconButton from "@mui/material/IconButton";
 import Button from "@mui/material/Button";
-import SendIcon from "@mui/icons-material/Send";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 import PersonIcon from "@mui/icons-material/Person";
 import EmailIcon from "@mui/icons-material/Email";
 import PhoneIcon from "@mui/icons-material/Phone";
@@ -16,9 +16,10 @@ import { useNavigate } from "react-router-dom";
 
 const ContactDetail = () => {
   const [inputs, setInputs] = useState({});
-  const id = useParams().id; // get the id from the url
+  const id = useParams().id;
   const history = useNavigate();
 
+  // this useEffect is used to fetch the contact with the id from the url
   useEffect(() => {
     const fetchHandler = async () => {
       await axios
@@ -31,6 +32,7 @@ const ContactDetail = () => {
   }, [id]);
 
   const sendRequest = async () => {
+    // update function
     await axios
       .put(`http://localhost:4000/contacts/${id}`, {
         firstName: String(inputs.firstName),
@@ -41,11 +43,22 @@ const ContactDetail = () => {
       .then((res) => res.data);
   };
 
+  const deleteHandler = async () => {
+    // delete function
+    await axios
+      .delete(`http://localhost:4000/contacts/${id}`)
+      .then((res) => res.data)
+      .then(() => history("/"))
+      .then(() => history("/contacts"));
+  };
+
   const handleSubmit = (e) => {
+    // submit function
     e.preventDefault();
     sendRequest().then(() => history("/contacts"));
   };
 
+  // this function handles the change of the input fields
   const handleChange = (e) => {
     setInputs((prevState) => ({
       ...prevState,
@@ -127,11 +140,20 @@ const ContactDetail = () => {
               <Button
                 variant="contained"
                 color="primary"
-                endIcon={<SendIcon />}
+                startIcon={<EditIcon />}
                 onClick={handleSubmit}
                 sx={{ mt: 2 }}
               >
                 Update Contact
+              </Button>
+              <Button
+                variant="contained"
+                color="secondary"
+                startIcon={<DeleteIcon />}
+                onClick={deleteHandler}
+                sx={{ mt: 2 }}
+              >
+                Delete Contact
               </Button>
             </Grid>
           </Box>

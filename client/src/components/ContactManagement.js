@@ -11,7 +11,11 @@ const ContactManagement = () => {
         <Typography variant="h4" gutterBottom className="section-title">
           Add or Import Contacts
         </Typography>
-        <Typography variant="body1" gutterBottom className="section-description">
+        <Typography
+          variant="body1"
+          gutterBottom
+          className="section-description"
+        >
           You can either manually add a new contact by filling out the form
           below, or you can automatically import contacts from a vCard file.
         </Typography>

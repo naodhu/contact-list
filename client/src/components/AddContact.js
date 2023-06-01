@@ -13,9 +13,12 @@ import PersonIcon from "@mui/icons-material/Person";
 import SendIcon from "@mui/icons-material/Send";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "./assets/styles/AddContact.css"; // Import your CSS
 
 const AddContact = () => {
   const history = useNavigate();
+
+  // i used the useState hook to store the inputs from the form in the state of the component and then send them to the server
   const [inputs, setInputs] = useState({
     firstName: "",
     lastName: "",
@@ -23,13 +26,14 @@ const AddContact = () => {
     phoneNumber: "",
   });
 
-  const handlChange = (e) => {
+  const handleChange = (e) => {
     setInputs((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
     }));
   };
 
+  // this function is used to send the request to the server to add a new contact to the database
   const sendRequest = async () => {
     axios
       .post("http://localhost:4000/contacts", {
@@ -40,7 +44,7 @@ const AddContact = () => {
       })
       .then((res) => res.data);
   };
-
+  // this function is used to send the request to the server to add a new contact to the database and then redirect to the contacts page
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(inputs);
@@ -48,17 +52,22 @@ const AddContact = () => {
   };
 
   return (
-    <Grid container direction="column" alignItems="center">
-      <form style={{ width: "100%", maxWidth: 400 }} onSubmit={handleSubmit}>
-        <FormLabel>First Name</FormLabel>
+    <Grid
+      container
+      direction="column"
+      alignItems="center"
+      className="container"
+    >
+      <form className="form" onSubmit={handleSubmit}>
+        <FormLabel className="form-label">First Name</FormLabel>
         <TextField
           value={inputs.firstName}
-          onChange={handlChange}
+          onChange={handleChange}
           margin="normal"
-          label="First Name"
           fullWidth
           variant="outlined"
           name="firstName"
+          className="input-field"
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
@@ -69,15 +78,15 @@ const AddContact = () => {
             ),
           }}
         />
-        <FormLabel>Last Name</FormLabel>
+        <FormLabel className="form-label">Last Name</FormLabel>
         <TextField
           value={inputs.lastName}
-          onChange={handlChange}
+          onChange={handleChange}
           margin="normal"
-          label="Last Name"
           fullWidth
           variant="outlined"
           name="lastName"
+          className="input-field"
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
@@ -88,15 +97,15 @@ const AddContact = () => {
             ),
           }}
         />
-        <FormLabel>Email</FormLabel>
+        <FormLabel className="form-label">Email</FormLabel>
         <TextField
           value={inputs.email}
-          onChange={handlChange}
+          onChange={handleChange}
           margin="normal"
-          label="Email"
           fullWidth
           variant="outlined"
           name="email"
+          className="input-field"
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
@@ -107,16 +116,16 @@ const AddContact = () => {
             ),
           }}
         />
-        <FormLabel> Phone Number </FormLabel>
+        <FormLabel className="form-label">Phone Number</FormLabel>
         <TextField
           value={inputs.phoneNumber}
-          onChange={handlChange}
+          onChange={handleChange}
           type="tel"
           margin="normal"
-          label="Phone Number"
           fullWidth
           variant="outlined"
           name="phoneNumber"
+          className="input-field"
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
@@ -130,9 +139,9 @@ const AddContact = () => {
         <Button
           type="submit"
           variant="contained"
-          color="primary"
+          style={{ backgroundColor: "#007bff" }}
           endIcon={<SendIcon />}
-          style={{ marginTop: "1rem" }}
+          className="button-submit"
         >
           Add Contact
         </Button>
