@@ -1,0 +1,50 @@
+/* AddContact.css */
+.container {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: auto;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-label {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    color: #212529;
+    margin-top: 20px;
+    margin-bottom: 5px;
+  }
+  
+  .input-field {
+    font-family: 'Roboto', sans-serif;
+    color: #212529;
+  }
+  
+  .input-field .MuiOutlinedInput-input {
+    padding: 12px 14px;
+  }
+  
+  .input-field .MuiSvgIcon-root {
+    color: #495057;
+  }
+  
+  .button-submit {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    margin-top: 30px;
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    transition: background-color 0.3s;
+  }
+  
+  .button-submit:hover {
+    background-color: #0056b3;
+  }
+  
