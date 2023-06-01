@@ -19,10 +19,13 @@ const Contacts = () => {
   const [filteredContacts, setFilteredContacts] = useState([]);
 
   useEffect(() => {
-    fetchHandler().then((data) => setContacts(data.contacts));
+    fetchHandler().then((data) => {
+      // Sort the contacts by first name
+      const sortedContacts = data.contacts.sort((a, b) => a.firstName.localeCompare(b.firstName));
+      setContacts(sortedContacts);
+    });
   }, []);
 
-  // this function will be called every time the user types in the search bar
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
 
@@ -49,9 +52,14 @@ const Contacts = () => {
 
     setFilteredContacts(filtered.length > 0 ? filtered : []);
   };
-  // this will display the filtered contacts if there are any, otherwise it will display all contacts
+
+  // If there are filtered contacts display them, if not display all contacts
   const displayContacts =
-    filteredContacts.length > 0 ? filteredContacts : contacts;
+    searchTerm && filteredContacts.length === 0
+      ? [<div key='0'>No contacts found with this search term</div>]
+      : filteredContacts.length > 0
+      ? filteredContacts
+      : contacts;
 
   return (
     <Container>
