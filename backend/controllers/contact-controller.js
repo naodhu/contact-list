@@ -94,9 +94,9 @@ const deleteContact = async (req, res, next) => {
   }
 };
 
-// Importing contacts function
+// Importing contacts
 const importContacts = async (req, res, next) => {
-  // check if the file exists
+  // checking if the file exists
   if (!req.file) {
     return res.status(400).json({ message: "No file received" });
   }
@@ -119,14 +119,25 @@ const importContacts = async (req, res, next) => {
   // Loop over each vCard
   for (const vCard of vCards) {
     // Get contact details
-    const firstName = vCard.get("n").valueOf().split(";")[1];
-    const lastName = vCard.get("n").valueOf().split(";")[0];
+    const nameField = vCard.get("n");
+    let firstName, lastName;
+
+    if (nameField) {
+      firstName = nameField.valueOf().split(";")[1];
+      lastName = nameField.valueOf().split(";")[0];
+    } else {
+      // If the vCard doesn't have a name, skip it
+      console.error("Missing 'n' property in vCard.");
+      continue; // Skip to the next vCard
+    }
+
     let phoneNumber = vCard.get("tel");
     if (Array.isArray(phoneNumber)) {
       phoneNumber = phoneNumber[0].valueOf();
     } else {
       phoneNumber = phoneNumber ? phoneNumber.valueOf() : null;
     }
+
     const email = vCard.get("email") ? vCard.get("email").valueOf() : null;
 
     // Create a new contact
