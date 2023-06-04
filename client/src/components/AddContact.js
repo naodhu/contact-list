@@ -13,7 +13,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import SendIcon from "@mui/icons-material/Send";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "./assets/styles/AddContact.css"; // Import your CSS
+import "./assets/styles/AddContact.css";
 
 const AddContact = () => {
   const history = useNavigate();

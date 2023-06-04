@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
@@ -8,14 +8,19 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const theme = createTheme();
 
-ReactDOM.render(
-  <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </ThemeProvider>
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+const root = document.getElementById("root");
+
+if (root !== null) {
+  const reactRoot = ReactDOM.createRoot(root);
+
+  reactRoot.render(
+    <React.StrictMode>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ThemeProvider>
+    </React.StrictMode>
+  );
+}

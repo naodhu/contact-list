@@ -1,11 +1,20 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Contact from "./Contact";
-import { Container, List, Button, TextField } from "@mui/material";
+import { Container, List, Button, TextField, Fade } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import { Link } from "react-router-dom";
+import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
+import { styled } from "@mui/system";
+
+const CustomAlert = styled(Alert)({
+  backgroundColor: "#f0f0f0",
+  color: "#333",
+});
 
 const URL = "http://localhost:4000/contacts";
 
@@ -20,8 +29,11 @@ const Contacts = () => {
 
   useEffect(() => {
     fetchHandler().then((data) => {
+      console.log(data.contacts);
       // Sort the contacts by first name
-      const sortedContacts = data.contacts.sort((a, b) => a.firstName.localeCompare(b.firstName));
+      const sortedContacts = data.contacts.sort((a, b) =>
+        a.firstName.localeCompare(b.firstName)
+      );
       setContacts(sortedContacts);
     });
   }, []);
@@ -56,7 +68,14 @@ const Contacts = () => {
   // If there are filtered contacts display them, if not display all contacts
   const displayContacts =
     searchTerm && filteredContacts.length === 0
-      ? [<div key='0'>No contacts found with this search term</div>]
+      ? [
+          <Fade in={true} key="0">
+            <CustomAlert icon={<InfoOutlinedIcon fontSize="inherit" />}>
+              <AlertTitle>Search Result</AlertTitle>
+              No contacts found with this search term
+            </CustomAlert>
+          </Fade>,
+        ]
       : filteredContacts.length > 0
       ? filteredContacts
       : contacts;
@@ -88,9 +107,13 @@ const Contacts = () => {
         New
       </Button>
       <List>
-        {displayContacts.map((contact, i) => (
-          <Contact key={i} contact={contact} />
-        ))}
+        {displayContacts.map((item) =>
+          item.hasOwnProperty("firstName") ? (
+            <Contact key={item._id.$oid} contact={item} />
+          ) : (
+            item
+          )
+        )}
       </List>
     </Container>
   );

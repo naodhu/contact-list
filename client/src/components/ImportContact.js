@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { Button, Typography, Grid, Box } from "@mui/material";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';  
+import { useNavigate } from "react-router-dom";
 import "./assets/styles/ImportContacts.css";
 
 const ImportContacts = () => {
   const [selectedFile, setSelectedFile] = useState();
-  const navigate = useNavigate(); // Use useHistory
+  const navigate = useNavigate(); // this is used to navigate to the selected file
 
   const submitFile = async () => {
     if (!selectedFile) return;
@@ -29,7 +29,7 @@ const ImportContacts = () => {
       if (response.status < 400) {
         // Modified condition
         alert("Contacts imported successfully");
-        navigate('/'); // Navigate to contacts page
+        navigate("/"); // Navigate to contacts page
       } else {
         alert("Failed to import contacts");
       }
